@@ -6,13 +6,13 @@ use App\Models\Lead;
 
 interface LeadRepositoryInterface
 {
-    public function create(array $data);
+    public function all();
 
-    public function find($id);
+    public function get(int $id);
 
-    public function update(Lead $lead, array $data);
+    public function save(Model $model);
 
-    public function delete(Lead $lead);
+    public function delete(Model $model);
 
-    public function updateScore(Lead $lead, $score);
+    public function fillAndSave(Model $lead, array $data);
 }

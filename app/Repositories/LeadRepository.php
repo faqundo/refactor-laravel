@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Lead;
+use Illuminate\Database\Eloquent\Model;
 
 class LeadRepository extends BaseRepository implements LeadRepositoryInterface
 {
@@ -11,12 +12,12 @@ class LeadRepository extends BaseRepository implements LeadRepositoryInterface
         parent::__construct($lead);
     }
 
-    // Specific Metod
-    public function updateScore(Lead $lead, $score)
+    public function fillAndSave(Model $lead, array $data)
     {
-        $lead->score = $score;
-        $lead->save();
+        $lead->fill($data);
+        $this->save($lead);
 
         return $lead;
     }
+
 }

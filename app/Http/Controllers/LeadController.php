@@ -55,15 +55,16 @@ class LeadController extends Controller
         return view('leads.edit', ['lead' => $lead]);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request,Lead $lead)
     {
-        $lead = $this->leadService->findLead($id);
-
+    
         if (!$lead) {
             return 'Lead not found';
         }
 
-        $this->leadService->updateLead($lead, $request->only(['name', 'email', 'phone']));
+        $lead->fill($request->all());
+        $this->leadRepository->save($user);
+        $lead->save();
 
         // Send lead to scoring system
         $score = $this->leadService->getLeadScore($lead);

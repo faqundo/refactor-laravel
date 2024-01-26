@@ -16,19 +16,17 @@ class LeadService
 
     public function createLead(array $data)
     {
-        $lead = $this->leadRepository->create($data);
-
-        return $lead;
+        return $this->leadRepository->save($this->leadRepository->create($data));
     }
 
     public function findLead($id)
     {
-        return $this->leadRepository->find($id);
+        return $this->leadRepository->get($id);
     }
 
     public function updateLead(Lead $lead, array $data)
     {
-        $this->leadRepository->update($lead, $data);
+        $this->leadRepository->fillAndSave($lead, $data);
     }
 
     public function deleteLead(Lead $lead)
@@ -38,8 +36,7 @@ class LeadService
 
     public function getLeadScore(Lead $lead)
     {
-
-        return rand(1, 100); 
+        return rand(1, 100);
     }
 
     public function updateLeadScore(Lead $lead, $score)
