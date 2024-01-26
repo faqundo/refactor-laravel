@@ -1,66 +1,75 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+Refactorización del Controlador y Servicios en Laravel: Guía Paso a Paso
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+1. Introducción:
 
-## About Laravel
+Descripción del problema inicial y la necesidad de refactorización.
+Objetivos de la refactorización.
+2. Creación de Repositorios:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+2.1. Creación de BaseRepository:
+Explicación y justificación:
+Creación de una clase base para operaciones comunes en los repositorios.
+Implementación:
+Creación de BaseRepository con métodos para all, get, save, y delete.
+2.2. Creación de Repositorio de Usuario (UserRepository):
+Implementación y métodos:
+Extensión de BaseRepository para el modelo User.
+2.3. Creación de Repositorio de Lead (LeadRepository):
+Implementación y métodos:
+Extensión de BaseRepository para el modelo Lead.
+2.4. Interfaces de Repositorios (UserRepositoryInterface y LeadRepositoryInterface):
+Importancia y uso:
+Definición de contratos para los repositorios.
+3. Servicios:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+3.1. Creación de UserService:
+Implementación y métodos:
+Uso del repositorio de usuarios en operaciones específicas.
+3.2. Creación de LeadService:
+Implementación y métodos:
+Uso del repositorio de leads en operaciones específicas.
+4. Actualización del Controlador:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+4.1. Refactorización del Método store:
+Uso del servicio y repositorio:
+Inyección de dependencias y delegación de responsabilidades.
+4.2. Refactorización del Método update:
+Uso del servicio y repositorio:
+Inyección de dependencias y simplificación del código.
+4.3. Actualización de Métodos show, edit, y destroy:
+Uso del servicio y repositorio:
+Adaptación de los métodos para usar servicios y repositorios.
+Creación del Request específico para update:
+Creación de un LeadUpdateRequest para manejar la validación específica de la actualización.
+5. Creación de Vistas:
 
-## Learning Laravel
+5.1. Vista para show:
+Creación y estructura básica:
+Desarrollo de una vista para mostrar detalles de un lead.
+5.2. Vista para edit:
+Creación y estructura básica:
+Desarrollo de una vista para editar detalles de un lead.
+6. Configuración de Rutas:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+6.1. Rutas para show, edit, y update:
+Configuración en el archivo web.php:
+Integración de las nuevas rutas en el sistema de enrutamiento.
+7. Pruebas y Ejecución:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+7.1. Creación de Test Automatizados:
+Desarrollo de pruebas unitarias y de integración:
+Uso de PHPUnit para realizar pruebas sobre los controladores y servicios.
+7.2. Ejecución de Pruebas:
+Comando para correr los test:
+php artisan test
+7.3. Puesta en Marcha:
+Comando para iniciar el servidor de pruebas:
+php artisan serve
+Endpoint de cada ruta:
+Descripción de las URL y métodos HTTP para acceder a cada endpoint.
+8. Conclusiones:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Resumen de los cambios realizados.
+Beneficios de la refactorización.
+Recomendaciones finales.
+Este índice incluye la creación del Request específico para update, los comandos para correr pruebas y la ejecución del servidor de pruebas, así como la descripción de los endpoints
